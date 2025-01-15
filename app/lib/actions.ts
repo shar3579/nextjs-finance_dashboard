@@ -104,14 +104,17 @@ export async function updateInvoice(
     redirect('/dashboard/invoices');
   }
 
+// actions.ts - Fixed deleteInvoice function
 export async function deleteInvoice(id: string) {
     try {
-        await sql`DELETE FROM invoices WHERE id = ${id}`;
+        await sql`
+            DELETE FROM invoices WHERE id = ${id}
+        `;
         revalidatePath('/dashboard/invoices');
         return { message: 'Deleted Invoice.' };
-      } catch (error) {
+    } catch (error) {
         return { message: 'Database Error: Failed to Delete Invoice.' };
-      }
+    }
 }
 
 
